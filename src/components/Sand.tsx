@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { ArrowLeft, X, Check, Paintbrush } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, Modality } from '@google/genai';
 
 type Step = 'intro' | 'scene' | 'place' | 'interpret';
 
@@ -117,12 +117,12 @@ export default function Sand({ onBack, onComplete }: { onBack: () => void; onCom
         model: 'gemini-2.5-flash-preview-image-generation',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: {
-          responseModalities: ['TEXT', 'IMAGE'],
-        } as any,
+          responseModalities: [Modality.TEXT, Modality.IMAGE],
+        },
       });
 
       // Extract image from response parts
-      const parts = (response as any).candidates?.[0]?.content?.parts;
+      const parts = response.candidates?.[0]?.content?.parts;
       if (parts) {
         for (const part of parts) {
           if (part.inlineData) {
@@ -134,7 +134,7 @@ export default function Sand({ onBack, onComplete }: { onBack: () => void; onCom
       setImageError('no image was generated');
     } catch (error: any) {
       console.error('Image generation failed:', error);
-      setImageError(error?.message?.slice(0, 60) || 'could not generate image');
+      setImageError(error?.message?.slice(0, 80) || 'could not generate image');
     } finally {
       setIsGeneratingImage(false);
     }
