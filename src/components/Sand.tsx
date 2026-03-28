@@ -475,9 +475,9 @@ IMPORTANT RULES:
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="flex-1 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto"
+                className="flex-1 flex flex-col items-center p-6 md:p-12 overflow-y-auto"
               >
-                <div className="max-w-2xl w-full">
+                <div className="max-w-2xl w-full py-4">
                   {isInterpreting ? (
                     <div className="text-center">
                       <motion.p
