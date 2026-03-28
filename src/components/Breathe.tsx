@@ -15,8 +15,9 @@ export default function Breathe({ onBack, onComplete }: { onBack: () => void; on
   const [showEndButtons, setShowEndButtons] = useState(false);
   const flowerScale = useRef(0);
   const showFlower = useRef(false);
+  const flowerColor = useRef(0); // 0=white, 1=full color
 
-  const totalCycles = 15;
+  const totalCycles = 8;
 
   // Hand tracking refs
   const handPos = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
@@ -208,7 +209,16 @@ export default function Breathe({ onBack, onComplete }: { onBack: () => void; on
       ctx.bezierCurveTo(width, -length * 0.3, width, -length * 0.8, 0, -length);
       ctx.bezierCurveTo(-width, -length * 0.8, -width, -length * 0.3, 0, 0);
 
-      ctx.fillStyle = 'white';
+      // Blend from white to color based on flowerColor progress
+      const c = flowerColor.current;
+      if (c <= 0.01) {
+        ctx.fillStyle = 'white';
+      } else {
+        const r = Math.round(255 - c * (isInner ? 30 : 15));
+        const g = Math.round(255 - c * (isInner ? 110 : 80));
+        const b = Math.round(255 - c * (isInner ? 70 : 40));
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+      }
       ctx.fill();
 
       ctx.strokeStyle = '#171717';
@@ -284,13 +294,26 @@ export default function Breathe({ onBack, onComplete }: { onBack: () => void; on
       }
 
       // Center Core
+      const cc = flowerColor.current;
       ctx.beginPath();
       ctx.arc(cx, cy, 10 + 4 * openness, 0, Math.PI * 2);
-      ctx.fillStyle = 'white';
+      if (cc <= 0.01) {
+        ctx.fillStyle = 'white';
+      } else {
+        const r = Math.round(255 - cc * 10);
+        const g = Math.round(255 - cc * 130);
+        const b = Math.round(255 - cc * 60);
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
+      }
       ctx.fill();
       ctx.strokeStyle = '#171717';
       ctx.lineWidth = 3;
       ctx.stroke();
+
+      // Gradually transition flower color toward target
+      if (stage === 'anchor') {
+        flowerColor.current += (1 - flowerColor.current) * 0.008;
+      }
 
       ctx.restore(); // Restore the scale transform
 
