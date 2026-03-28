@@ -1,0 +1,4 @@
+1.Feasibility-Assess the practicality and usefulness of the project. Does it address a real-world problem, and can it be implemented effectively?
+2.Impact-valuate the potential impact of the project. What scope of potential impact does this project have?
+3.Innovation/Technical Complexity-Consider the level of innovation and technical sophistication demonstrated in the project. Does it introduce novel concepts or technologies?
+4.Presentation/Documentation.Evaluate the clarity and comprehensibility of the presentation and documentation. Is it easy for judges to understand the project's goals, methods, and outcomes?

@@ -1,0 +1,5 @@
+{
+  "name": "Mindful Haven",
+  "description": "A psychological healing platform with immersive environments, meditation, and stress release.",
+  "requestFramePermissions": ["camera", "microphone"]
+}
