@@ -176,7 +176,7 @@ export default function Scene({ onSelectModule, menuItems, completedModules }: S
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
-            className="absolute inset-0 z-30 flex items-end justify-center pointer-events-none pb-12 md:pb-16"
+            className="absolute inset-0 z-30 flex items-start justify-center pointer-events-none pt-[12%]"
             onClick={() => setShowWelcome(false)}
           >
             <motion.div

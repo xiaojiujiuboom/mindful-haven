@@ -114,7 +114,7 @@ export default function Sand({ onBack, onComplete }: { onBack: () => void; onCom
       const prompt = `Generate an image: a gentle sand tray therapy miniature scene viewed from above at a slight angle. Soft watercolor pencil style on warm cream paper. A rectangular wooden sandbox tray filled with fine sand, containing small figurines and objects: ${desc}. Warm, therapeutic, minimal. No text or words in the image.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-2.5-flash-preview-05-20',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: {
           responseModalities: ['TEXT', 'IMAGE'],
